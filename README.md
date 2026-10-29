@@ -74,17 +74,28 @@ réussit alors, et Gitdrop indique que le site n'a pas été publié.
 ## Installation
 
 ```bash
-# Avec Node.js ≥ 20
+# Après la première publication sur npm, avec Node.js ≥ 20
 npm install -g gitdrop
 
-# Sans Node.js — binaire autonome (macOS / Linux)
+# Sans Node.js — binaire autonome (macOS / Linux), après une release
 curl -fsSL https://github.com/djabliameizafredy-a11y/gitdrop/releases/latest/download/install.sh | sh
 
-# Windows (PowerShell)
+# Windows (PowerShell), après une release
 irm https://github.com/djabliameizafredy-a11y/gitdrop/releases/latest/download/install.ps1 | iex
 ```
 
-Les scripts vérifient la somme SHA-256 du binaire avant de l'installer. Double-cliquer le binaire
+Le dépôt GitHub est public. Pour installer depuis les sources avant la première publication npm ou
+la première release binaire, utilisez Node.js ≥ 20 et Git :
+
+```bash
+git clone https://github.com/djabliameizafredy-a11y/gitdrop.git
+cd gitdrop
+npm ci
+npm run build
+npm link
+```
+
+Les scripts d'installation des binaires vérifient leur somme SHA-256. Double-cliquer un binaire
 (sans argument) ouvre directement l'interface. Prérequis dans tous les cas : **Git** installé.
 
 ## Connexion GitHub
@@ -132,7 +143,10 @@ tester le binaire : `GITDROP_CLI=$PWD/dist/bin/gitdrop-linux-x64 node --test tes
 git tag v1.0.0 && git push --tags
 ```
 
-- `publish.yml` construit, teste et publie sur npm avec provenance (secret `NPM_TOKEN`).
+- `publish.yml` construit, teste et publie sur npm avec provenance via npm Trusted Publishing (OIDC).
+  Configurez d'abord `djabliameizafredy-a11y/gitdrop` et le workflow `publish.yml` comme éditeur de
+  confiance dans les paramètres du paquet npm, avec la permission de publier. Le premier tag publie
+  la version déclarée dans `package.json`.
 - `release.yml` construit les binaires (Linux x64/arm64, macOS x64/arm64, Windows x64) et les joint à
   la release GitHub avec `install.sh` et `install.ps1`. Les scripts pointent vers
   `djabliameizafredy-a11y/gitdrop` (surcharge possible avec `GITDROP_REPO`). Variable de dépôt optionnelle :

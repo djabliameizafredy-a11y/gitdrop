@@ -2,6 +2,14 @@
   "name": "gitdrop",
   "version": "1.0.0",
   "description": "Drop your project. Push to GitHub. Crée un dépôt GitHub et y pousse un dossier ou un .zip en quelques secondes (CLI + interface locale).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djabliameizafredy-a11y/gitdrop.git"
+  },
+  "homepage": "https://github.com/djabliameizafredy-a11y/gitdrop#readme",
+  "bugs": {
+    "url": "https://github.com/djabliameizafredy-a11y/gitdrop/issues"
+  },
   "keywords": [
     "github",
     "git",
