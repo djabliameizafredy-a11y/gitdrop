@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.log
+*.tgz
+!artifacts/gitdrop-1.0.0.tgz
+.env
+.env.*
+!.env.example
+.DS_Store
